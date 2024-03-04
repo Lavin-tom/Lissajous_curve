@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lissajous curve</title>
+    <meta name="title" content="Lissajous curve" />
+    <meta
+      name="description"
+      content="Interactive Lissajous curve Playground Using SVG"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://github.com/Lavin-tom"
+    />
+    <meta property="og:title" content="Lissajous curve" />
+    <meta
+      property="og:description"
+      content="Interactive Lissajous curve Playground Using SVG"
+    />
+	<link rel="stylesheet" type="text/css" href="res/style.css">
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="container">
+      <path id="upper_graph" />
+      <circle id="base" />
+      <line id="upper_string" />
+      <circle id="upper_bob" />
+      <line id="lower_string" />
+      <circle id="lower_bob" />
+      <path id="tracer" />
+    </svg>
+    <div class="menu">
+      <a href="/" id="home">⌂</a>
+      <a href="https://github.com/Lavin-tom" id="github"
+        >GITHUB</a
+      >
+      <button id="pause">| |</button>
+      <span id="reset" onclick="refresh()">RESET</span>
+      <div class="toggles">
+        <span id="trace">
+          <input
+            type="checkbox"
+            onchange="tracer.setActive(this.checked)"
+            id="resetbox"
+            checked
+          /><label for="resetbox">SHOW TRACE?</label>
+        </span>
+        <span id="graph">
+          <input
+            type="checkbox"
+            onchange="upperGraph.setActive(this.checked)"
+            id="graphbox"
+            checked
+          /><label for="graphbox">SHOW GRAPH?</label>
+        </span>
+      </div>
+      <div class="toggles">
+        <span id="persist">
+          <input
+            type="checkbox"
+            onchange="tracer.setMAX(this.checked ? 10000 : 500)"
+            id="persistbox"
+          /><label for="persistbox">PERSIST TRACE?</label>
+        </span>
+        <span id="smoothen">
+          <input
+            type="checkbox"
+            onchange="tracer.smoothen=this.checked"
+            id="smoothenbox"
+          /><label for="smoothenbox">SMOOTHEN TRACE?</label>
+        </span>
+      </div>
+      <div class="Scales">
+        <span class="scale">
+          <span onclick="doublePendulum.decreaseUpperMass()">-</span>
+          <span>A</span>
+          <span onclick="doublePendulum.increaseUpperMass()">+</span>
+        </span>
+        <span class="scale">
+          <span onclick="doublePendulum.decreaseLowerMass()">-</span>
+          <span>B</span>
+          <span onclick="doublePendulum.increaseLowerMass()">+</span>
+        </span>
+      </div>
+      <div class="frequencies">
+        <span class="frequency">
+          <span onclick="doublePendulum.decreaseUpperMass()">-</span>
+          <span>a</span>
+          <span onclick="doublePendulum.increaseUpperMass()">+</span>
+        </span>
+        <span class="frequency">
+          <span onclick="doublePendulum.decreaseLowerMass()">-</span>
+          <span>b</span>
+          <span onclick="doublePendulum.increaseLowerMass()">+</span>
+        </span>
+      </div>	  
+      <span class="speed">
+        <span onclick="doublePendulum.decreaseSpeed()">-</span>
+        <span>SPEED</span>
+        <span onclick="doublePendulum.increaseSpeed()">+</span>
+      </span>
+      <span id="share" onclick="shareConfig()">SHARE</span>
+      <span id="toggle" onclick="toggleMenu()"> ☰ </span>
+    </div>
+  </body>
+  </html>
