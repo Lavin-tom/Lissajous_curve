@@ -77,7 +77,6 @@
       }
     }
 	
-	
 class Tracer {
       constructor() {
         this.points = [];
@@ -309,12 +308,6 @@ function refresh() {
       upperBob.style.display = show ? "block" : "none";
       lowerString.style.display = show ? "block" : "none";
       lowerBob.style.display = show ? "block" : "none";
-    }
-
-    function shareConfig() {
-      window.location.hash = btoa(JSON.stringify(doublePendulum));
-      shareButton.innerHTML = "👆 COPY LINK !!!";
-      setTimeout(() => (shareButton.innerHTML = "SHARE"), 1500);
     }
 
     function handleHold(clickX, clickY) {
