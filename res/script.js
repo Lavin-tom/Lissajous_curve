@@ -69,9 +69,7 @@ class LissajousCurve {
   }
 
   move() {
-    // Increment time by dt
     this.t += this.dt;
-    // Update curve position
     this.x = this.A * Math.sin(this.a * this.t + this.deltasVal) + this.width / 2;
     this.y = this.B * Math.sin(this.b * this.t) + this.height / 2;
   }
