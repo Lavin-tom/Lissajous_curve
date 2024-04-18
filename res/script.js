@@ -1,88 +1,66 @@
-class LissajousCurve {
-  constructor({
-    width,
-    height,
-    A,
-    B,
-    a,
-    b,
-    d,
-    t,
-    dt,
-    fps,
-    deltasVal,
-  }) {
-    this.width = width;
-    this.height = height;
-    this.A = A;
-    this.B = B;
-    this.a = a;
-    this.b = b;
-    this.d = d;
-    this.t = t;
-    this.dt = dt;
-    this.fps = fps;
-    this.setMoments();
-    this.deltasVal;
+// Define constants
+const container = document.getElementById('container');
+const upperGraph = document.getElementById('upper_graph');
+const base = document.getElementById('base');
+const upperString = document.getElementById('upper_string');
+const tracer = document.getElementById('tracer');
+
+const config = {
+  width: container.clientWidth,
+  height: container.clientHeight,
+  upperMass: 1,
+  lowerMass: 2,
+  frequencyRatio: 3,
+  phaseDifference: Math.PI / 2,
+  amplitude: Math.min(container.clientWidth, container.clientHeight) / 4,
+  trace: true,
+  persistentTrace: false,
+  smoothen: true,
+  speed: 1,
+};
+
+// Define utility functions
+const lissajous = (t) => {
+  const x = config.amplitude * Math.sin(config.frequencyRatio * t + config.phaseDifference);
+  const y = config.amplitude * Math.sin(t);
+  return { x, y };
+};
+
+const draw = () => {
+  const points = [];
+  for (let t = 0; t < 2 * Math.PI * config.speed; t += 0.01) {
+    points.push(lissajous(t));
   }
 
-  setWidth(w) {
-    this.width = w;
+  // Draw upper graph
+  if (config.trace) {
+    const path = points.map((point) => `${point.x},${point.y}`).join(' ');
+    tracer.setAttribute('d', `M ${path}`);
   }
 
-  setHeight(h) {
-    this.height = h;
-  }
+  // Draw base and upper string
+  const lastPoint = points[points.length - 1];
+  base.setAttribute('cx', config.width / 2);
+  base.setAttribute('cy', config.height / 2);
+  base.setAttribute('r', 5);
+  upperString.setAttribute('x1', config.width / 2);
+  upperString.setAttribute('y1', config.height / 2);
+  upperString.setAttribute('x2', config.width / 2 + lastPoint.x);
+  upperString.setAttribute('y2', config.height / 2 + lastPoint.y);
+};
 
-  setScalingA(A) {
-    this.A = A;
-  }
+// Define event handlers
+const refresh = () => {
+  // Clear trace
+  tracer.setAttribute('d', '');
+  draw();
+};
 
-  setScalingB(B) {
-    this.B = B;
-  }
+const toggleMenu = () => {
+  // Toggle menu visibility
+  const menu = document.querySelector('.menu');
+  menu.classList.toggle('show');
+};
 
-  setFrequencyX(a) {
-    this.a = a;
-  }
-
-  setFrequencyY(b) {
-    this.b = b;
-  }
-
-  increaseSpeed() {
-    this.dt *= this.speedScaleFactor;
-  }
-
-  decreaseSpeed() {
-    this.dt /= this.speedScaleFactor;
-  }
-
-  setDeltasVal(val) {
-    this.deltasVal = val;
-  }
-
-  setMoments() {
-    const { A, B, a, b, t, deltasVal } = this;
-    this.x = A * Math.sin(a * t + deltasVal) + this.width / 2;
-    this.y = B * Math.sin(b * t) + this.height / 2;
-  }
-
-  move() {
-    this.t += this.dt;
-    this.x = this.A * Math.sin(this.a * this.t + this.deltasVal) + this.width / 2;
-    this.y = this.B * Math.sin(this.b * this.t) + this.height / 2;
-  }
-
-  drawCurve(ctx) {
-    ctx.beginPath();
-    ctx.moveTo(this.x, this.y);
-    
-    for (let i = 0; i < 1000; i++) { 
-      this.move(); 
-      ctx.lineTo(this.x, this.y); 
-    }
-
-    ctx.stroke(); 
-  }
-}
+// Initialize
+draw();
