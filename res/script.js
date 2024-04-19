@@ -1,4 +1,3 @@
-// Define constants
 const container = document.getElementById('container');
 const upperGraph = document.getElementById('upper_graph');
 const base = document.getElementById('base');
@@ -18,8 +17,6 @@ const config = {
   smoothen: true,
   speed: 1,
 };
-
-// Define utility functions
 const lissajous = (t) => {
   const x = config.amplitude * Math.sin(config.frequencyRatio * t + config.phaseDifference);
   const y = config.amplitude * Math.sin(t);
@@ -31,14 +28,10 @@ const draw = () => {
   for (let t = 0; t < 2 * Math.PI * config.speed; t += 0.01) {
     points.push(lissajous(t));
   }
-
-  // Draw upper graph
   if (config.trace) {
     const path = points.map((point) => `${point.x},${point.y}`).join(' ');
     tracer.setAttribute('d', `M ${path}`);
   }
-
-  // Draw base and upper string
   const lastPoint = points[points.length - 1];
   base.setAttribute('cx', config.width / 2);
   base.setAttribute('cy', config.height / 2);
@@ -48,8 +41,6 @@ const draw = () => {
   upperString.setAttribute('x2', config.width / 2 + lastPoint.x);
   upperString.setAttribute('y2', config.height / 2 + lastPoint.y);
 };
-
-// Define event handlers
 const refresh = () => {
   // Clear trace
   tracer.setAttribute('d', '');
@@ -57,10 +48,7 @@ const refresh = () => {
 };
 
 const toggleMenu = () => {
-  // Toggle menu visibility
   const menu = document.querySelector('.menu');
   menu.classList.toggle('show');
 };
-
-// Initialize
 draw();
