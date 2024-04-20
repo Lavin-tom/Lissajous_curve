@@ -13,24 +13,24 @@
   <link rel="stylesheet" type="text/css" href="res/style.css">
 </head>
 <body>
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="container">
-    <path id="tracer" />
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="container" width="500" height="500">
+    <path id="tracer" stroke="black" fill="none" />
   </svg>
   <div class="menu">
     <span id="reset" onclick="refresh()">RESET</span>
     <div class="toggles">
       <span id="trace">
-        <input type="checkbox" onchange="tracer.setActive(this.checked)" id="resetbox" checked>
+        <input type="checkbox" onchange="toggleTrace(this.checked)" id="resetbox" checked>
         <label for="resetbox">SHOW TRACE?</label>
       </span>
     </div>
     <div class="toggles">
       <span id="persist">
-        <input type="checkbox" onchange="tracer.setMAX(this.checked ? 10000 : 500)" id="persistbox">
+        <input type="checkbox" onchange="togglePersist(this.checked)" id="persistbox">
         <label for="persistbox">PERSIST TRACE?</label>
       </span>
       <span id="smoothen">
-        <input type="checkbox" onchange="tracer.smoothen=this.checked" id="smoothenbox">
+        <input type="checkbox" onchange="toggleSmoothen(this.checked)" id="smoothenbox">
         <label for="smoothenbox">SMOOTHEN TRACE?</label>
       </span>
     </div>
