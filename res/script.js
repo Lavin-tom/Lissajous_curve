@@ -28,9 +28,21 @@ const draw = () => {
   }
 };
 const refresh = () => {
-  // Clear trace
   tracer.setAttribute('d', '');
   draw();
 };
+function refresh() {
+  const tracer = document.getElementById('tracer');
+  tracer.setAttribute('d', '');
+}
+function decreaseSpeed() {
+  
+}
+function increaseSpeed() {
+}
+function toggleMenu() {
+  const menu = document.querySelector('.menu');
+  menu.classList.toggle('show');
+}
 
 draw();
