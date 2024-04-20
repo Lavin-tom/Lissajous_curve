@@ -9,9 +9,9 @@ const config = {
   speed: 1,
 };
 const lissajous = (t) => {
-  const frequencyRatio = 3; 
-  const phaseDifference = Math.PI / 2; 
-  
+  const frequencyRatio = 3;
+  const phaseDifference = Math.PI / 2;
+
   const x = config.amplitude * Math.sin(frequencyRatio * t + phaseDifference);
   const y = config.amplitude * Math.sin(t);
   return { x, y };
@@ -22,27 +22,40 @@ const draw = () => {
   for (let t = 0; t < 2 * Math.PI * config.speed; t += 0.01) {
     points.push(lissajous(t));
   }
-  if (config.trace) {
-    const path = points.map((point) => `${point.x},${point.y}`).join(' ');
-    tracer.setAttribute('d', `M ${path}`);
-  }
+  const path = points.map((point) => `${point.x},${point.y}`).join(' ');
+  tracer.setAttribute('d', `M${path}`);
 };
-const refresh = () => {
-  tracer.setAttribute('d', '');
-  draw();
-};
+
 function refresh() {
-  const tracer = document.getElementById('tracer');
-  tracer.setAttribute('d', '');
+  tracer.setAttribute('d', ''); 
 }
+
+function toggleTrace(checked) {
+  config.trace = checked; 
+  draw(); 
+}
+
+function togglePersist(checked) {
+
+}
+
+function toggleSmoothen(checked) {
+
+}
+
 function decreaseSpeed() {
-  
+  config.speed -= 0.1; 
+  draw(); 
 }
+
 function increaseSpeed() {
+  config.speed += 0.1;
+  draw(); 
 }
+
 function toggleMenu() {
   const menu = document.querySelector('.menu');
-  menu.classList.toggle('show');
+  menu.classList.toggle('show'); 
 }
 
 draw();
