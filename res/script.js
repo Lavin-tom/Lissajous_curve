@@ -7,7 +7,10 @@ const config = {
   amplitude: Math.min(container.clientWidth, container.clientHeight) / 4,
   trace: true,
   speed: 1,
+  animationDelay: 10, // Milliseconds between drawing each point
+  persistTrace: false // Set to true for persistent trace, false otherwise
 };
+
 const lissajous = (t) => {
   const frequencyRatio = 3;
   const phaseDifference = Math.PI / 2;
@@ -17,13 +20,25 @@ const lissajous = (t) => {
   return { x, y };
 };
 
-const draw = () => {
+const draw = async () => {
   const points = [];
   for (let t = 0; t < 2 * Math.PI * config.speed; t += 0.01) {
     points.push(lissajous(t));
   }
-  const path = points.map((point) => `${point.x},${point.y}`).join(' ');
-  tracer.setAttribute('d', `M${path}`);
+
+  for (let i = 0; i < points.length; i++) {
+    const path = points.slice(0, i + 1).map((point) => `${point.x},${point.y}`).join(' ');
+    tracer.setAttribute('d', `M${path}`);
+
+    if (config.persistTrace) {
+      await new Promise(resolve => setTimeout(resolve, config.animationDelay));
+    } else {
+      await new Promise(resolve => setTimeout(() => {
+        tracer.setAttribute('d', ''); 
+        resolve();
+      }, config.animationDelay));
+    }
+  }
 };
 
 function refresh() {
@@ -36,11 +51,7 @@ function toggleTrace(checked) {
 }
 
 function togglePersist(checked) {
-
-}
-
-function toggleSmoothen(checked) {
-
+  config.persistTrace = checked; 
 }
 
 function decreaseSpeed() {
@@ -49,7 +60,7 @@ function decreaseSpeed() {
 }
 
 function increaseSpeed() {
-  config.speed += 0.1;
+  config.speed += 0.1; 
   draw(); 
 }
 
