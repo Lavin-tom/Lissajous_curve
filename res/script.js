@@ -1,22 +1,33 @@
 const container = document.getElementById('container');
 const tracer = document.getElementById('tracer');
+let phaseDifference = Math.PI / 2; 
+let a = 2;
+let b = 3;
+
+container.setAttribute('width', container.clientWidth);
+container.setAttribute('height', container.clientHeight);
+
+const centerX = container.clientWidth / 2;
+const centerY = container.clientHeight / 2;
+tracer.setAttribute('transform', `translate(${centerX}, ${centerY})`);
 
 const config = {
   width: container.clientWidth,
   height: container.clientHeight,
-  amplitude: Math.min(container.clientWidth, container.clientHeight) / 4,
+  amplitude: Math.min(container.clientWidth, container.clientHeight) / 2, 
   trace: true,
   speed: 1,
-  animationDelay: 10, // Milliseconds between drawing each point
-  persistTrace: false // Set to true for persistent trace, false otherwise
+  animationDelay: 10, 
+  persistTrace: true
 };
+
+tracer.setAttribute('stroke', 'white');
+tracer.setAttribute('stroke-width', '2'); // Adjust the stroke width as needed
 
 const lissajous = (t) => {
   const frequencyRatio = 3;
-  const phaseDifference = Math.PI / 2;
-
-  const x = config.amplitude * Math.sin(frequencyRatio * t + phaseDifference);
-  const y = config.amplitude * Math.sin(t);
+  const x = (a*(config.amplitude/2)) * Math.sin(frequencyRatio * t + phaseDifference);
+  const y = (b*(config.amplitude/2)) * Math.sin(t);
   return { x, y };
 };
 
@@ -69,4 +80,26 @@ function toggleMenu() {
   menu.classList.toggle('show'); 
 }
 
+function changePhase() {
+  const phaseSelect = document.getElementById('phase-select');
+  const selectedValue = parseInt(phaseSelect.value);
+
+  const phaseValues = [0, Math.PI / 4, Math.PI / 2, (3 * Math.PI) / 4];
+  phaseDifference = phaseValues[selectedValue];
+
+  draw();
+}
+function changeAandB(){
+	const Avalueselect = document.getElementById('A-select');
+	const AselectedValue = parseInt(Avalueselect.value);
+	const Avalues= [1,2,3,4,5,6];
+	AValue = Avalues[AselectedValue];
+	
+	const Bvalueselect = document.getElementById('B-select');
+	const BselectedValue = parseInt(Bvalueselect.value);
+	const Bvalues= [1,2,3,4,5,6];
+	BValue = Bvalues[BselectedValue];	
+	config.amplitude = Math.min(container.clientWidth, container.clientHeight) / Math.max(a, b);
+	draw();
+}
 draw();

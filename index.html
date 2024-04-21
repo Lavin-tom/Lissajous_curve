@@ -13,9 +13,9 @@
   <link rel="stylesheet" type="text/css" href="res/style.css">
 </head>
 <body>
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="container" width="500" height="500">
-    <path id="tracer" stroke="black" fill="none" />
-  </svg>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="container">
+    <path id="tracer" stroke="white" fill="none" />
+</svg>
   <div class="menu">
     <span id="reset" onclick="refresh()">RESET</span>
     <div class="toggles">
@@ -39,6 +39,37 @@
       <span>SPEED</span>
       <span onclick="increaseSpeed()">+</span>
     </span>
+	<div class="toggles">
+	<label for="phase-select">Select Phase Difference:</label>
+	<select id="phase-select" onchange="changePhase()">
+		<option value="0">0</option>
+		<option value="1">π/4</option>
+		<option value="2">π/2</option>
+		<option value="3">3π/4</option>
+	</select>
+	</div>	
+	<div class="toggles">
+	<label for="A-select">Select Phase Difference:</label>
+	<select id="A-select" onchange="changeAandB()">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+	</select>
+	</div>
+	<div class="toggles">
+	<label for="B-select">Select Phase Difference:</label>
+	<select id="B-select" onchange="changeAandB()">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+	</select>
+	</div>	
     <span id="toggle" onclick="toggleMenu()"> ☰ </span>
   </div>
   <script src="res/script.js"></script>
