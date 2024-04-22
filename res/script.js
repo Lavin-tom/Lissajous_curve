@@ -26,8 +26,8 @@ tracer.setAttribute('stroke-width', '2'); // Adjust the stroke width as needed
 
 const lissajous = (t) => {
   const frequencyRatio = 3;
-  const x = (a*(config.amplitude/2)) * Math.sin(frequencyRatio * t + phaseDifference);
-  const y = (b*(config.amplitude/2)) * Math.sin(t);
+  const x = (a * (config.amplitude / 2)) * Math.sin(frequencyRatio * t + phaseDifference);
+  const y = (b * (config.amplitude / 2)) * Math.sin(t);
   return { x, y };
 };
 
@@ -50,8 +50,17 @@ const draw = async () => {
       }, config.animationDelay));
     }
   }
+  updateSVGSize();
 };
 
+const updateSVGSize = () => {
+  const boundingBox = container.getBBox(); // Get the bounding box of the graph content
+  const width = boundingBox.width;
+  const height = boundingBox.height;
+
+  container.setAttribute('width', width);
+  container.setAttribute('height', height);
+};
 function refresh() {
   tracer.setAttribute('d', ''); 
 }
@@ -84,22 +93,24 @@ function changePhase() {
   const phaseSelect = document.getElementById('phase-select');
   const selectedValue = parseInt(phaseSelect.value);
 
-  const phaseValues = [0, Math.PI / 4, Math.PI / 2, (3 * Math.PI) / 4];
+  const phaseValues = [0, Math.PI / 4, Math.PI / 2, (3 * Math.PI) / 4, Math.PI];
   phaseDifference = phaseValues[selectedValue];
 
   draw();
 }
-function changeAandB(){
-	const Avalueselect = document.getElementById('A-select');
-	const AselectedValue = parseInt(Avalueselect.value);
-	const Avalues= [1,2,3,4,5,6];
-	AValue = Avalues[AselectedValue];
-	
-	const Bvalueselect = document.getElementById('B-select');
-	const BselectedValue = parseInt(Bvalueselect.value);
-	const Bvalues= [1,2,3,4,5,6];
-	BValue = Bvalues[BselectedValue];	
-	config.amplitude = Math.min(container.clientWidth, container.clientHeight) / Math.max(a, b);
-	draw();
+
+function changeAandB() {
+  const Avalueselect = document.getElementById('A-select');
+  const AselectedValue = parseInt(Avalueselect.value);
+  const Avalues = [1, 2, 3, 4, 5, 6];
+  a = Avalues[AselectedValue];
+  
+  const Bvalueselect = document.getElementById('B-select');
+  const BselectedValue = parseInt(Bvalueselect.value);
+  const Bvalues = [1, 2, 3, 4, 5, 6];
+  b = Bvalues[BselectedValue];  
+  config.amplitude = Math.min(container.clientWidth, container.clientHeight) / Math.max(a, b);
+  draw();
 }
+
 draw();

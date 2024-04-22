@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: #121212;
+  background-color: #121212; /* Dark background color */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,31 +13,21 @@ body {
 }
 
 svg {
-  width: 80%;
-  max-width: 800px;
+  max-width: 100%; /* Ensure SVG scales properly */
   height: auto;
   background-color: transparent;
   touch-action: none;
-  display: block; /* Added to center the SVG horizontally */
-  margin: 0 auto; /* Added to center the SVG horizontally */
 }
 
-line {
-  stroke: #FFFFFF;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  transition: 0s all;
-}
-path {
-  stroke: #FFFFFF;
-  stroke-width: 1.5;
+line, path {
+  stroke: #FFFFFF; /* White stroke color */
+  stroke-width: 2; /* Increased stroke width for better visibility */
   stroke-linecap: round;
   stroke-linejoin: round;
-  fill: none;
 }
 
 #upper_graph {
-  stroke: #212121;
+  stroke: #212121; /* Darker stroke color for specific elements if needed */
 }
 
 input[type="checkbox"] {
@@ -51,14 +41,13 @@ input[type="checkbox"] {
   flex-direction: column;
   font-size: 12pt;
   align-items: center;
-  font-weight: bolder;
+  font-weight: bold; /* Changed from bolder to bold for consistency */
   font-family: "Courier New", Courier, monospace;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
   color: #909090;
   transition: 0.5s all;
-}
 }
 
 .menu * {
@@ -67,8 +56,8 @@ input[type="checkbox"] {
 }
 
 .menu span,
-a,
-button {
+.menu a,
+.menu button {
   text-decoration: none;
   border: none;
   background-color: transparent;
@@ -84,9 +73,8 @@ button {
 }
 
 #pause {
-  font-weight: bolder;
-  font-size: 5pt;
-  transform: scale(2, 2);
+  font-size: 12pt; /* Increased font size for better readability */
+  transform: scale(1.5); /* Adjusted scaling for consistency */
   margin-left: 10px;
   margin-right: 10px;
   white-space: nowrap;
@@ -111,11 +99,8 @@ button {
 }
 
 @media only screen and (min-width: 768px) {
-  line {
-    stroke-width: 0.3;
-  }
-  path {
-    stroke-width: 0.1;
+  line, path {
+    stroke-width: 1; /* Adjusted stroke width for larger screens */
   }
   .menu {
     flex-direction: row;
@@ -123,8 +108,8 @@ button {
     justify-content: space-around;
   }
   .menu span,
-  a,
-  button {
+  .menu a,
+  .menu button {
     font-size: 20pt;
     margin-left: 10px;
     margin-right: 10px;
@@ -133,7 +118,8 @@ button {
     display: none;
   }
   #pause {
-    transform: scale(5, 5);
+    font-size: 20pt; /* Increased font size for larger screens */
+    transform: scale(2); /* Adjusted scaling for larger screens */
   }
   .masses,
   .toggles {
