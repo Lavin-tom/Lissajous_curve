@@ -22,7 +22,7 @@ const config = {
 };
 
 tracer.setAttribute('stroke', 'white');
-tracer.setAttribute('stroke-width', '2'); // Adjust the stroke width as needed
+tracer.setAttribute('stroke-width', '2'); 
 
 const lissajous = (t) => {
   const frequencyRatio = 3;
@@ -54,7 +54,7 @@ const draw = async () => {
 };
 
 const updateSVGSize = () => {
-  const boundingBox = container.getBBox(); // Get the bounding box of the graph content
+  const boundingBox = container.getBBox();
   const width = boundingBox.width;
   const height = boundingBox.height;
 
