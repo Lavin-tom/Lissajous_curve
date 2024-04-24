@@ -13,8 +13,8 @@ body {
 }
 
 svg {
-  max-width: 100%; /* Ensure SVG scales properly */
-  height: auto;
+  width: 100%; /* Ensure SVG takes full width of its container */
+  height: 100%; /* Ensure SVG takes full height of its container */
   background-color: transparent;
   touch-action: none;
 }
