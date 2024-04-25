@@ -6,18 +6,17 @@ let B = 2;
 let a = 2;
 let b = 2;
 
-// Function to center the SVG container
+// Function to center the SVG container and set its dimensions
 const centerSVG = () => {
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
 
-  const svgWidth = Math.min(windowWidth * 0.8, windowHeight * 0.8); // Adjust width to maintain aspect ratio
-  const svgHeight = svgWidth * 0.8; // Adjust height to maintain aspect ratio
+  const svgSize = Math.min(windowWidth * 0.8, windowHeight * 0.8); // Adjust size to maintain aspect ratio
 
-  container.style.width = `${svgWidth}px`;
-  container.style.height = `${svgHeight}px`;
-  container.style.left = `${(windowWidth - svgWidth) / 2}px`;
-  container.style.top = `${(windowHeight - svgHeight) / 2}px`;
+  container.setAttribute('width', svgSize);
+  container.setAttribute('height', svgSize);
+  container.style.left = `${(windowWidth - svgSize) / 2}px`;
+  container.style.top = `${(windowHeight - svgSize) / 2}px`;
 };
 
 // Call the function initially and on window resize
@@ -35,14 +34,14 @@ const config = {
 };
 
 // Set SVG stroke properties
-tracer.setAttribute('stroke', 'white');
+tracer.setAttribute('stroke', 'yellow');
 tracer.setAttribute('stroke-width', '2');
 
 // Calculate Lissajous curve points
 const lissajous = (t) => {
   //const frequencyRatio = 3;
-  const x = (A * (config.amplitude / 2)) * Math.sin(a * t + phaseDifference);
-  const y = (A * (config.amplitude / 2)) * Math.sin(b * t);
+  const x = (Math.sin(a * t + phaseDifference) + 1) / 2 * container.clientWidth;
+  const y = (Math.sin(b * t) + 1) / 2 * container.clientHeight;
   return { x, y };
 };
 
@@ -98,12 +97,14 @@ function togglePersist(checked) {
 // Decrease drawing speed
 function decreaseSpeed() {
   config.speed -= 0.1;
+  config.animationDelay += 10;
   draw();
 }
 
 // Increase drawing speed
 function increaseSpeed() {
   config.speed += 0.1;
+  config.animationDelay -= 10;
   draw();
 }
 
@@ -135,9 +136,21 @@ function changeAandB() {
   const BselectedValue = parseInt(Bvalueselect.value);
   const Bvalues = [1, 2, 3, 4, 5, 6];
   b = Bvalues[BselectedValue];
-  config.amplitude = Math.min(container.clientWidth, container.clientHeight) / Math.max(a, b);
+
   draw();
 }
+function changeColor() {
+  const SelectedColor = document.getElementById('color-select');
+  const SelectedColorValue = parseInt(SelectedColor.value);
+  const Colors = [violet, inidgo, blue, green, yellow, orange, red];
+  color = Colors[SelectedColorValue];
 
+  const Bvalueselect = document.getElementById('B-select');
+  const BselectedValue = parseInt(Bvalueselect.value);
+  const Bvalues = [1, 2, 3, 4, 5, 6];
+  b = Bvalues[BselectedValue];
+
+  draw();
+}
 // Initial draw
 draw();

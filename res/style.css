@@ -10,13 +10,13 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  margin: 0; /* Reset body margin */
 }
 
 svg {
   width: 100%; /* Ensure SVG takes full width of its container */
   height: 100%; /* Ensure SVG takes full height of its container */
   background-color: transparent;
-  touch-action: none;
 }
 
 line, path {
@@ -30,18 +30,13 @@ line, path {
   stroke: #212121; /* Darker stroke color for specific elements if needed */
 }
 
-input[type="checkbox"] {
-  margin-right: 10px;
-  transform: scale(1.5, 1.5);
-}
-
 .menu {
   position: fixed;
   display: flex;
   flex-direction: column;
   font-size: 12pt;
   align-items: center;
-  font-weight: bold; /* Changed from bolder to bold for consistency */
+  font-weight: bold;
   font-family: "Courier New", Courier, monospace;
   top: 20px;
   left: 50%;
@@ -85,8 +80,10 @@ input[type="checkbox"] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 65vw;
+  width: 80%; /* Adjusted width */
   justify-content: space-between;
+  max-width: 600px; /* Added max-width for better responsiveness */
+  margin: 0 auto; /* Center align */
 }
 
 .masses .mass {
