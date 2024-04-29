@@ -97,14 +97,10 @@ line, path {
     font-size: 20pt; /* Increased font size for larger screens */
     transform: scale(2); /* Adjusted scaling for larger screens */
   }
-  .masses,
   .toggles {
     width: auto;
   }
   .toggles {
     align-items: flex-start;
-  }
-  .masses .mass span {
-    font-size: 14pt;
   }
 }
