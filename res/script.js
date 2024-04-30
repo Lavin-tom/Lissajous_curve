@@ -142,14 +142,8 @@ function changeAandB() {
 function changeColor() {
   const SelectedColor = document.getElementById('color-select');
   const SelectedColorValue = parseInt(SelectedColor.value);
-  const Colors = [violet, inidgo, blue, green, yellow, orange, red];
+  const Colors = ['violet', 'indigo', 'blue', 'green', 'yellow', 'orange', 'red'];
   color = Colors[SelectedColorValue];
-
-  const Bvalueselect = document.getElementById('B-select');
-  const BselectedValue = parseInt(Bvalueselect.value);
-  const Bvalues = [1, 2, 3, 4, 5, 6];
-  b = Bvalues[BselectedValue];
-
   draw();
 }
 // Initial draw
