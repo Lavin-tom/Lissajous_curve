@@ -5,24 +5,18 @@ let A = 2;
 let B = 2;
 let a = 2;
 let b = 2;
-
-// Function to center the SVG container and set its dimensions
 const centerSVG = () => {
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
 
-  const svgSize = Math.min(windowWidth * 0.8, windowHeight * 0.8); // Adjust size to maintain aspect ratio
-
+  const svgSize = Math.min(windowWidth * 0.8, windowHeight * 0.8);
   container.setAttribute('width', svgSize);
   container.setAttribute('height', svgSize);
   container.style.left = `${(windowWidth - svgSize) / 2}px`;
   container.style.top = `${(windowHeight - svgSize) / 2}px`;
 };
-
-// Call the function initially and on window resize
 window.addEventListener('resize', centerSVG);
 centerSVG();
-
 const config = {
   width: container.clientWidth,
   height: container.clientHeight,
@@ -32,20 +26,14 @@ const config = {
   animationDelay: 10,
   persistTrace: true
 };
-
-// Set SVG stroke properties
 tracer.setAttribute('stroke', 'yellow');
 tracer.setAttribute('stroke-width', '2');
-
-// Calculate Lissajous curve points
 const lissajous = (t) => {
   //const frequencyRatio = 3;
   const x = (Math.sin(a * t + phaseDifference) + 1) / 2 * container.clientWidth;
   const y = (Math.sin(b * t) + 1) / 2 * container.clientHeight;
   return { x, y };
 };
-
-// Draw Lissajous curve
 const draw = async () => {
   const points = [];
   for (let t = 0; t < 2 * Math.PI * config.speed; t += 0.01) {
@@ -67,8 +55,6 @@ const draw = async () => {
   }
   updateSVGSize();
 };
-
-// Update SVG size based on traced path
 const updateSVGSize = () => {
   const boundingBox = container.getBBox();
   const width = boundingBox.width;
@@ -77,44 +63,30 @@ const updateSVGSize = () => {
   container.setAttribute('width', width);
   container.setAttribute('height', height);
 };
-
-// Refresh traced path
 function refresh() {
   tracer.setAttribute('d', '');
 }
-
-// Toggle tracing
 function toggleTrace(checked) {
   config.trace = checked;
   draw();
 }
-
-// Toggle persistent trace
 function togglePersist(checked) {
   config.persistTrace = checked;
 }
-
-// Decrease drawing speed
 function decreaseSpeed() {
   config.speed -= 0.1;
   config.animationDelay += 10;
   draw();
 }
-
-// Increase drawing speed
 function increaseSpeed() {
   config.speed += 0.1;
   config.animationDelay -= 10;
   draw();
 }
-
-// Toggle menu visibility
 function toggleMenu() {
   const menu = document.querySelector('.menu');
   menu.classList.toggle('show');
 }
-
-// Change phase difference
 function changePhase() {
   const phaseSelect = document.getElementById('phase-select');
   const selectedValue = parseInt(phaseSelect.value);
@@ -124,8 +96,6 @@ function changePhase() {
 
   draw();
 }
-
-// Change values of A and B
 function changeAandB() {
   const Avalueselect = document.getElementById('A-select');
   const AselectedValue = parseInt(Avalueselect.value);
@@ -136,7 +106,6 @@ function changeAandB() {
   const BselectedValue = parseInt(Bvalueselect.value);
   const Bvalues = [1, 2, 3, 4, 5, 6];
   b = Bvalues[BselectedValue];
-
   draw();
 }
 function changeColor() {
@@ -146,5 +115,4 @@ function changeColor() {
   color = Colors[SelectedColorValue];
   draw();
 }
-// Initial draw
 draw();
