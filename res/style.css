@@ -20,14 +20,14 @@ svg {
 }
 
 line, path {
-  stroke: #FFFFFF; /* White stroke color */
-  stroke-width: 2; /* Increased stroke width for better visibility */
+  stroke: #FFFFFF;
+  stroke-width: 2; 
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 #upper_graph {
-  stroke: #212121; /* Darker stroke color for specific elements if needed */
+  stroke: #212121;
 }
 
 .menu {
@@ -68,15 +68,15 @@ line, path {
 }
 
 #pause {
-  font-size: 12pt; /* Increased font size for better readability */
-  transform: scale(1.5); /* Adjusted scaling for consistency */
+  font-size: 12pt; 
+  transform: scale(1.5); 
   margin-left: 10px;
   margin-right: 10px;
   white-space: nowrap;
 }
 @media only screen and (min-width: 768px) {
   line, path {
-    stroke-width: 1; /* Adjusted stroke width for larger screens */
+    stroke-width: 1; 
   }
   .menu {
     flex-direction: row;
@@ -94,8 +94,8 @@ line, path {
     display: none;
   }
   #pause {
-    font-size: 20pt; /* Increased font size for larger screens */
-    transform: scale(2); /* Adjusted scaling for larger screens */
+    font-size: 20pt; 
+    transform: scale(2); 
   }
   .toggles {
     width: auto;
