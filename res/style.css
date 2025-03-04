@@ -14,8 +14,8 @@ body {
 }
 
 svg {
-  width: 100%; /* Ensure SVG takes full width of its container */
-  height: 100%; /* Ensure SVG takes full height of its container */
+  width: 100%; 
+  height: 100%;
   background-color: transparent;
 }
 
