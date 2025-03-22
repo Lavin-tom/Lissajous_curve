@@ -109,11 +109,11 @@ function changePhase() {
 function changeAandB() {
   const Avalueselect = document.getElementById('A-select');
   const AselectedValue = parseInt(Avalueselect.value);
-  a = AselectedValue + 1; // Since options start from 1
+  a = AselectedValue + 1;
 
   const Bvalueselect = document.getElementById('B-select');
   const BselectedValue = parseInt(Bvalueselect.value);
-  b = BselectedValue + 1; // Since options start from 1
+  b = BselectedValue + 1; 
 
   draw();
 }
